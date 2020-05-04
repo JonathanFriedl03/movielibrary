@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace WebAPISample.Migrations
+namespace WebAPIDevCode.Migrations
 {
     public partial class seededData : Migration
     {

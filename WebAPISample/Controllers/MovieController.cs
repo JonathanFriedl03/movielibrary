@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using WebAPISample.Data;
-using WebAPISample.Models;
+using WebAPIDevCode.Data;
+using WebAPIDevCode.Models;
 
-namespace WebAPISample.Controllers
+namespace WebAPIDevCode.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
@@ -23,7 +23,8 @@ namespace WebAPISample.Controllers
         public IActionResult Get()
         {
             // Retrieve all movies from db logic
-            return Ok(new string[] { "movie1 string", "movie2 string" });
+            var movieList = _context.Movies.ToList(); //sends back list of movies
+            return Ok(movieList);
         }
 
         // GET api/movie/5

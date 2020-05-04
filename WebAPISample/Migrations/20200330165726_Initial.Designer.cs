@@ -4,9 +4,9 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebAPISample.Data;
+using WebAPIDevCode.Data;
 
-namespace WebAPISample.Migrations
+namespace WebAPIDevCode.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
     [Migration("20200330165726_Initial")]
