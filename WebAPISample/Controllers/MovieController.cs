@@ -65,9 +65,7 @@ namespace WebAPIDevCode.Controllers
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
-            Movie movie = _context.Movies.Where(m => m.MovieId == id).SingleOrDefault();
-            _context.Remove(movie);
-            _context.SaveChanges();
+        
             // Delete movie from db logic
             var movie = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault();
             _context.Movies.Remove(movie);
