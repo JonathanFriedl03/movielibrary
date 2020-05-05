@@ -51,7 +51,13 @@ namespace WebAPIDevCode.Controllers
         public IActionResult Put([FromBody] Movie movie)
         {
             // Update movie in db logic
-            return Ok();
+            var movieToUpdate = _context.Movies.Single(a => a.MovieId == movie.MovieId);
+            movieToUpdate.Title = movie.Title;
+            movieToUpdate.Genre = movie.Genre;
+            movieToUpdate.Director = movie.Director;
+            movieToUpdate.Url = movie.Url;
+            _context.SaveChanges();
+            return Ok(movieToUpdate);
         }
 
         // DELETE api/movie/5
@@ -59,7 +65,10 @@ namespace WebAPIDevCode.Controllers
         public IActionResult Delete(int id)
         {
             // Delete movie from db logic
-            return Ok();
+            var movie = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault();
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return Ok(_context.Movies.ToList());
         }
     }
 }
