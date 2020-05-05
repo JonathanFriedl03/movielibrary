@@ -69,7 +69,10 @@ namespace WebAPIDevCode.Controllers
             _context.Remove(movie);
             _context.SaveChanges();
             // Delete movie from db logic
-            return Ok();
+            var movie = _context.Movies.Where(a => a.MovieId == id).FirstOrDefault();
+            _context.Movies.Remove(movie);
+            _context.SaveChanges();
+            return Ok(_context.Movies.ToList());
         }
     }
 }

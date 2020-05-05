@@ -14,7 +14,7 @@ namespace WebAPIDevCode.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Seed data - needs migration
+            //Seed data -needs migration
             modelBuilder.Entity<Movie>()
             .HasData(
                new Movie { MovieId = 1, Title = "The Departed", Genre = "Drama", Director = "Martin Scorsese", Url = "https://www.imdb.com/title/tt0407887/mediaviewer/rm981113088" },
