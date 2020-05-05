@@ -52,13 +52,22 @@ namespace WebAPIDevCode.Controllers
         public IActionResult Put([FromBody] Movie movie)
         {
             // Update movie in db logic
-            return Ok();
+            var movieToUpdate = _context.Movies.Single(a => a.MovieId == movie.MovieId);
+            movieToUpdate.Title = movie.Title;
+            movieToUpdate.Genre = movie.Genre;
+            movieToUpdate.Director = movie.Director;
+            movieToUpdate.Url = movie.Url;
+            _context.SaveChanges();
+            return Ok(movieToUpdate);
         }
 
         // DELETE api/movie/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
+            Movie movie = _context.Movies.Where(m => m.MovieId == id).SingleOrDefault();
+            _context.Remove(movie);
+            _context.SaveChanges();
             // Delete movie from db logic
             return Ok();
         }
