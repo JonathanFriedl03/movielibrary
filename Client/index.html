@@ -1,23 +1,69 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+    <title>Movie Library</title>
     <title>jQuery AJAX POST Form</title>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
-<body>
 
-<div id="response">
-    <pre></pre>
+<body style = "background-color: #D4E4f7;">
+    <div class="container-fluid text-center">
+    <div class="jumbotron" style="background-color: #236AB9;" style="text-shadow: cornflowerblue;">
+    <h1 style="font-family: Georgia, serif;"><strong>Movie Library</strong></h1>
+    <p>  </p> 
+    </div>
+   
+    <div class="container" id="response">
+    <input class="form-control" id="myInput" type="text" placeholder="Search by Title, Genre or Director..">
+    <br>
+  <center> 
+    <div class="container">
+    <table class="table table-hover" style="text-decoration-color: #341c09" id="movieTable">
+        <tr>
+        </tr>
+    </table>
+    </div>
+</center>
+    <hr>
+    <div>   
+    <table class="table table-striped " id="movieTable">
+        <tr>
+        </tr>
+    </table>
 </div>
-
-<form id="my-form">
-    <input type="text" name="title" placeholder="Title" />
-    <input type="text" name="director" placeholder="Director" />
-
-    <button type="submit">Submit</button>
-</form>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script type="text/javascript" src="./app.js"></script>
+<div>   
+    <form id="my-form">
+        <h2 style="font-family:Georgia;" style="text-decoration-color: #341c09;">Add Movie To Library</h2>
+        <div class="form-group row">
+       
+        <div class="col-xs-3">
+            <input class="form-control" type="text" name="title" placeholder="Title" />
+        </div>
+        
+        <div class="col-xs-3">
+            <input class="form-control" type="text" name="genre" placeholder="Genre" />
+        </div>
+       
+        <div class="col-xs-3">
+            <input class="form-control" type="text" name="director" placeholder="Director" />
+        </div> 
+    
+        <div class="col-xs-3">
+            <input class="form-control" type="text" name="url" placeholder="IMDb url" />
+        </div>
+        <hr>
+        <button style="font-family:Georgia;" type="submit" class="btn btn-default">Add</button>
+        <hr>
+      
+        </div>
+    </form>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./app.js"></script>
+</div>
 </body>
 </html>

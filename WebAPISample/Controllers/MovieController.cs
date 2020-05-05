@@ -20,11 +20,11 @@ namespace WebAPIDevCode.Controllers
         }
         // GET api/movie
         [HttpGet]
-        public IActionResult Get()
+        public IEnumerable<Movie> Get()
         {
             // Retrieve all movies from db logic
-            var movieList = _context.Movies.ToList(); //sends back list of movies
-            return Ok(movieList);
+
+            return _context.Movies.ToList();
         }
 
         // GET api/movie/5
