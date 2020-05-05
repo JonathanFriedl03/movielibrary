@@ -9,8 +9,8 @@ using WebAPIDevCode.Data;
 namespace WebAPIDevCode.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20200504184702_seededData")]
-    partial class seededData
+    [Migration("20200505141420_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,7 +20,7 @@ namespace WebAPIDevCode.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("WebAPISample.Models.Movie", b =>
+            modelBuilder.Entity("WebAPIDevCode.Models.Movie", b =>
                 {
                     b.Property<int>("MovieId")
                         .ValueGeneratedOnAdd()
