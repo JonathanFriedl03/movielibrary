@@ -3,8 +3,8 @@
         var dict = {
         	Title : this["title"].value,
         	Director: this["director"].value,
-        	Genre: this["director"].value,
-        	Url: this["director"].value
+        	Genre: this["genre"].value,
+        	Url: this["url"].value
         };
 
         $.ajax({
@@ -14,7 +14,8 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-                $('#response pre').html( data );
+				$('#response pre').html( data );
+				
             },
             error: function( jqXhr, textStatus, errorThrown ){
                 console.log( errorThrown );
@@ -28,12 +29,12 @@
 })(jQuery);
 
 	$(function(){
+		let data = {}
 		$.get("https://localhost:44325/api/movie", function(data){
 		console.log(data);
 		
 		for(let i = 0; i < data.length; i++){
-			$("#Movies").append(
-				`<div>${JSON.stringify(data[i].title)}</div>`);
+			$("#title").append(`<tr><td>${data[i]["title"]}.replace(/\"/g,'')}</td></tr>`);
 		}
 		})
 	});
