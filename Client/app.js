@@ -1,8 +1,6 @@
 
 
-	$(function(){
-	loadMovies();
-	});
+	
 
 	(function($){
     function processForm( e ){
@@ -62,13 +60,14 @@
 			MovieId : id,
 			Title : title,
 			Director: director,
-			Genre: genre
+			Genre: genre,
+			Url : url
 			
 		};
 		dict.Title = prompt(`Enter the new Title:`);
-		dict.Genre = prompt(`Enter the new Director:`);
+		dict.Director = prompt(`Enter the new Director:`);
 		dict.Genre = prompt(`Enter the new Genre:`);
-		dict.Genre = prompt(`Enter the new Url:`);
+		dict.Url = prompt(`Enter the new Url:`);
 		$.ajax({
 			url: 'https://localhost:44325/api/movie',
             dataType: 'text',
@@ -84,4 +83,8 @@
 		}
 		});
 	}
+	$(function(){
+		loadMovies();
+		});
+		
 	//.replace(/\"/g,'')
