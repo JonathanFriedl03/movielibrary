@@ -1,6 +1,8 @@
 
 
-	
+	$(function(){
+		loadMovies();
+		});
 
 	(function($){
     function processForm( e ){
@@ -51,11 +53,12 @@
 		console.log(data);
 		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th></tr>`)
 		for(let i = 0; i < data.length; i++){
-			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td>
+			$('#movies2Load').append(`<tr><td>${data[i]["title"]}</td>
 			<td>${data[i]["director"]}</td>
 			<td>${data[i]["genre"]}</td>
-			<td><button onClick="deleteMovie('${data[i][movieId]}')">Delete</button></td></tr>
-			<td><button onClick="edit('${data[i]['movieId']}', '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td>`);
+			<td><button  onClick="edit('${data[i]['movieId']}', '${data[i]['title']}',  '${data[i]['director']}',
+			'${data[i]['genre']}' '${data[i]['url']}')">Edit</button></td>
+			<td><button onClick="deleteMovie('${data[i]['movieId']}')">Delete</button></td></tr>`);
 			
 		}
 		})
@@ -89,9 +92,7 @@
 		}
 		});
 	}
-	$(function(){
-		loadMovies();
-		});
+	
 		function deleteMovie(id){
 			id = parseInt9id;
 			$.ajax({
@@ -109,4 +110,17 @@
 			}
 			})
 		}
+
+		// below is example of search bar from w3s my favorite part of the project 
+		// <!-- https://www.w3schools.com/jquery/tryit.asp?filename=tryjquery_filters_table-->
+
+		$(document).ready(function() {
+			$('#myInput').on('keyup', function() {
+				var value = $(this).val().toLowerCase();
+				$('#movieTable tr').filter(function() {
+					$(this).toggle($(this).text().toLowerCase().indexOf(value) > -1);
+				});
+			});
+		});
+
 	//.replace(/\"/g,'')
