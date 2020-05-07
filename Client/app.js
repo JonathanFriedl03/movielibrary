@@ -1,5 +1,13 @@
+var movies = [];
+
+$(function(){
+	loadMovies();
+});
+
 (function($){
     function processForm( e ){
+		console.log(e);
+		
         var dict = {
         	Title : this["title"].value,
         	Director: this["director"].value,
@@ -14,7 +22,9 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-				$('#response pre').html( data );
+				$('#title td').append(function( data){
+					data["title"];
+				} );
 				
             },
             error: function( jqXhr, textStatus, errorThrown ){
@@ -28,13 +38,15 @@
     $('#my-form').submit( processForm );
 })(jQuery);
 
-	$(function(){
+	function loadMovies(){
 		let data = {}
 		$.get("https://localhost:44325/api/movie", function(data){
 		console.log(data);
-		
+		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th><th>Url</th></tr>`)
 		for(let i = 0; i < data.length; i++){
-			$("#title").append(`<tr><td>${data[i]["title"]}.replace(/\"/g,'')}</td></tr>`);
+			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td><td>${data[i]["director"]}</td><td>${data[i]["genre"]}</td><td>${data[i]["url"]}</td><td><button onClick="Edit(`${data[i]["movieId"]}`, '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td></tr>`);
+			
 		}
 		})
-	});
+	};
+	//.replace(/\"/g,'')
