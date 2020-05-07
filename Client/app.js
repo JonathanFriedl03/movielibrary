@@ -20,10 +20,16 @@
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-				$('#movies2Load').append(`<tr><td>${data['title']}</td></tr>`);
-				$('#director').append(`<tr><td>${data['director']}</td></tr>`);
-				$('#genre').append(`<tr><td>${data['genre']}</td></tr>`);
-
+				$('#movies2Load').append(`<tr><td>${data['title']}</td><td>${data['genre']}</td><td>${data[
+					'director'
+				]}</td><td><button  onClick="Edit('${data['movieId']}', '${data[
+					'title'
+				]}', '${data['genre']}', '${data['director']}', '${data[
+					'url'
+				]}')">Edit</button></td><td><button onClick="deleteMovie('${data[
+					'movieId'
+				]}')">Delete</button></td></tr>`
+			);
 					
 				 
 				
@@ -48,7 +54,7 @@
 			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td>
 			<td>${data[i]["director"]}</td>
 			<td>${data[i]["genre"]}</td>
-			
+			<td><button onClick="deleteMovie('${data[i][movieId]}')">Delete</button></td></tr>
 			<td><button onClick="edit('${data[i]['movieId']}', '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td>`);
 			
 		}
@@ -86,5 +92,21 @@
 	$(function(){
 		loadMovies();
 		});
-		
+		function deleteMovie(id){
+			id = parseInt9id;
+			$.ajax({
+				url: 'https://localhost:44325/api/movie',
+				dataType: 'text',
+				type: 'delete',
+				contentType: 'application/json',
+				data: JSON.stringify(id),
+				success: function( data, textStatus, jQxhr ){
+					document.getElementById('movies2Load').innerHTML = '';
+					loadMovies();
+			},
+			error: function( jqXhr, textStatus, errorThrown ){
+				console.log( errorThrown );
+			}
+			})
+		}
 	//.replace(/\"/g,'')
