@@ -1,10 +1,10 @@
 
 
-$(function(){
+	$(function(){
 	loadMovies();
-});
+	});
 
-(function($){
+	(function($){
     function processForm( e ){
 		console.log(e);
 		
@@ -22,7 +22,7 @@ $(function(){
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-				$('#title').append(`<tr><td>${data['title']}</td></tr>`);
+				$('#movies2Load').append(`<tr><td>${data['title']}</td></tr>`);
 				$('#director').append(`<tr><td>${data['director']}</td></tr>`);
 				$('#genre').append(`<tr><td>${data['genre']}</td></tr>`);
 
@@ -39,22 +39,49 @@ $(function(){
     }
 
     $('#my-form').submit( processForm );
-})(jQuery);
+	})(jQuery);
 
 	function loadMovies(){
 		let data = {}
 		$.get("https://localhost:44325/api/movie", function(data){
 		console.log(data);
-		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th><th>Url</th></tr>`)
+		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th></tr>`)
 		for(let i = 0; i < data.length; i++){
 			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td>
 			<td>${data[i]["director"]}</td>
 			<td>${data[i]["genre"]}</td>
-			<td>${data[i]["url"]}</td>
-			<td><button onClick="Edit('${data[i]['movieId']}', '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td>
-			<td>`);
+			
+			<td><button onClick="edit('${data[i]['movieId']}', '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td>`);
 			
 		}
 		})
 	};
+	function edit(id, title, genre, director){
+		id = parseInt(id);
+		var dict = {
+			MovieId : id,
+			Title : title,
+			Director: director,
+			Genre: genre
+			
+		};
+		dict.Title = prompt(`Enter the new Title:`);
+		dict.Genre = prompt(`Enter the new Director:`);
+		dict.Genre = prompt(`Enter the new Genre:`);
+		dict.Genre = prompt(`Enter the new Url:`);
+		$.ajax({
+			url: 'https://localhost:44325/api/movie',
+            dataType: 'text',
+            type: 'put',
+            contentType: 'application/json',
+            data: JSON.stringify(dict),
+            success: function( data, textStatus, jQxhr ){
+				document.getElementById('movies2Load').innerHTML = '';
+				loadMovies();
+		},
+		error: function( jqXhr, textStatus, errorThrown ){
+			console.log( errorThrown );
+		}
+		});
+	}
 	//.replace(/\"/g,'')
