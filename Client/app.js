@@ -1,4 +1,4 @@
-var movies = [];
+
 
 $(function(){
 	loadMovies();
@@ -22,9 +22,12 @@ $(function(){
             contentType: 'application/json',
             data: JSON.stringify(dict),
             success: function( data, textStatus, jQxhr ){
-				$('#title td').append(function( data){
-					data["title"];
-				} );
+				$('#title').append(`<tr><td>${data['title']}</td></tr>`);
+				$('#director').append(`<tr><td>${data['director']}</td></tr>`);
+				$('#genre').append(`<tr><td>${data['genre']}</td></tr>`);
+
+					
+				 
 				
             },
             error: function( jqXhr, textStatus, errorThrown ){
@@ -44,7 +47,12 @@ $(function(){
 		console.log(data);
 		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th><th>Url</th></tr>`)
 		for(let i = 0; i < data.length; i++){
-			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td><td>${data[i]["director"]}</td><td>${data[i]["genre"]}</td><td>${data[i]["url"]}</td><td><button onClick="Edit(`${data[i]["movieId"]}`, '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td></tr>`);
+			$("#movies2Load").append(`<tr><td>${data[i]["title"]}</td>
+			<td>${data[i]["director"]}</td>
+			<td>${data[i]["genre"]}</td>
+			<td>${data[i]["url"]}</td>
+			<td><button onClick="Edit('${data[i]['movieId']}', '${data[i]["title"]}', '${data[i]["director"]}', '${data[i]["genre"]}', '${data[i]["url"]}')">Edit</button></td>
+			<td>`);
 			
 		}
 		})
