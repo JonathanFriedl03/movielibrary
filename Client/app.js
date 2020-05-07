@@ -18,7 +18,7 @@ $(function() {
 			data: JSON.stringify(dict),
 			success: function(data, textStatus, jQxhr) {
 				$('#movies2Load').append(`<tr><td>${data['title']}</td><td>${data['director']}</td>
-				<td>${data['genre']}</td><td><button  onClick="GetImage('${data['url']}')">Images</button></td>
+				<td>${data['genre']}</td><td><button  onClick="getImage('${data['url']}')">Images</button></td>
 				<td><button  onClick="edit('${data['movieId']}', '${data['title']}', '${data['director']}', '${data['genre']}', '${data['url']}')">Edit</button></td>
 				<td><button onClick="deleteMovie('${data['movieId']}')">Delete</button></td></tr>`);
 				document.getElementById('my-form').reset();
@@ -39,7 +39,7 @@ function loadMovies() {
 		$('#movies2Load').append(`<tr><th>Title</th><th>Director</th><th>Genre</th></tr>`);
 		for (let i = 0; i < data.length; i++) {
 			$('#movies2Load').append(`<tr><td>${data[i]['title']}</td><td>${data[i]['director']}</td>
-			<td>${data[i]['genre']}</td>
+			<td>${data[i]['genre']}</td><td><button  onClick="getImage('${data[i]['url']}')">Images</button></td>
 			<td><button  onClick="edit('${data[i]['movieId']}', '${data[i]['title']}', '${data[i]['director']}', 
 			'${data[i]['genre']}', '${data[i]['url']}')">Edit</button></td>
 			<td><button onClick="deleteMovie('${data[i]['movieId']}')">Delete</button></td></tr>`);
@@ -108,5 +108,9 @@ function deleteMovie(id) {
 				});
 			});
 		});
+//best quick examle I could find of get images https://developer.mozilla.org/en-US/docs/Web/API/Window/open
+		function getImage(url) {
+			window.open(url, 'MovieImages', 'width=500, height=450');
+		}
 
 	//.replace(/\"/g,'')
